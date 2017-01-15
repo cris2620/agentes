@@ -1,5 +1,6 @@
 package unsa.agente_tais.engine;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,13 +11,21 @@ import java.util.List;
 public class InferenceEngineKNN implements InferenceEngine {
 
     private Cases casesknn;
+    private ArrayList<Filter> filtros;
 
-    public InferenceEngineKNN(Cases cases) {
-        this.casesknn = cases;
+    public InferenceEngineKNN(Cases casesknn,  ArrayList filtros) {
+        this.casesknn = casesknn;
+        this.filtros = filtros;
     }
 
+    public InferenceEngineKNN(Cases casesknn) {
+        this.casesknn = casesknn;
+        this.filtros = new ArrayList<>();
+    }
+    
     public InferenceEngineKNN() {
         this.casesknn = new Cases();
+        this.filtros = new ArrayList<>();
     }
 
     @Override
@@ -42,9 +51,14 @@ public class InferenceEngineKNN implements InferenceEngine {
             }
         }
     }
+    
+    @Override
+    public void clearItems(){
+        casesknn.clearItems();
+    }
 
     @Override
-    public Item adapItem(Item evalItem, Item recoItem) {
+    public Item adapItem(Item evalItem, Item recoItem, int[] changeTraits) {
         return null;
     }
 
@@ -225,7 +239,48 @@ public class InferenceEngineKNN implements InferenceEngine {
     }
 
     @Override
-    public void saveCases(String url) {
+    public void saveAllCases(String url) {
     }
-
+    
+    @Override
+    public void WriteItem(String url) {
+    }
+    
+    @Override
+    public void addFilter(Filter newFilter){
+        filtros.add(newFilter);
+    }
+    
+    @Override
+    public void addFilters(List<Filter> listFilter){
+        filtros.addAll(listFilter);
+    }
+    
+    @Override
+    public void removeFilter(Filter deleteFilter){
+        for (int i = 0; i < filtros.size(); i++) {
+            if (filtros.get(i).equals(deleteFilter)) {
+                filtros.remove(i);
+                return;
+            }
+        }
+    }
+    
+    @Override
+    public void clearFilters(){
+        filtros.clear();
+    }
+    
+    @Override
+    public void useFilters(){
+        int count = 0;
+        ArrayList<Integer> indices = new ArrayList<>();
+        Filter tempFilter;
+        Item tempItem;
+        for (int i = 0; i < casesknn.size(); i++) {
+            tempItem = casesknn.getAtItem(i);
+            for (int j = 0; j < filtros.size(); j++) {
+            }
+        }
+    }
 }

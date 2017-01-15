@@ -12,7 +12,9 @@ public interface InferenceEngine {
     
     public void removeItem(Item deleteItem);
     
-    public Item adapItem(Item evalItem, Item recoItem);
+    public void clearItems();
+    
+    public Item adapItem(Item evalItem, Item recoItem, int[] changeTraits);
     
     public Item[] getSimilarItems(Item evalItem, int range);
     
@@ -22,5 +24,17 @@ public interface InferenceEngine {
     
     public double getDistItem(Item evalItem);
     
-    public void saveCases(String url);
+    public void saveAllCases(String url);
+    
+    public void WriteItem(String url);
+    
+    public void addFilter(Filter newFilter);
+    
+    public void addFilters(List<Filter> newFilter);
+    
+    public void removeFilter(Filter deleteFilter);
+    
+    public void clearFilters();
+    
+    public void useFilters();
 }

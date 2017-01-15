@@ -86,4 +86,122 @@ public class Trait<T> {
         return !(!this.getDescripcion().equals(evalTrait.getDescripcion())
                 || this.getValor().getClass() != evalTrait.getValor().getClass());
     }
+
+    public boolean testFilter(Filter evalFilter) {
+        if (this.getValor().getClass() != evalFilter.getFiltro().getClass()
+                || !this.getDescripcion().equals(evalFilter.getDescripcion())) {
+            return false;
+        } else {
+            Object tempValor = this.getValor();
+            switch (evalFilter.getTipo()) {
+                case Filter.RECHAZAR:
+                    return false;
+                case Filter.MAYOR:
+                    if (evalFilter.getFiltro().getClass() == String.class
+                            || tempValor.getClass() == Boolean.class
+                            || tempValor.getClass() == Character.class) {
+                        return false;
+                    }
+                    if (evalFilter.getFiltro().getClass() == Integer.class) {
+                        return (int) tempValor > (int) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Double.class) {
+                        return (double) tempValor > (double) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Float.class) {
+                        return (float) tempValor > (float) evalFilter.getFiltro();
+                    }
+                    break;
+                case Filter.MENOR:
+                    if (evalFilter.getFiltro().getClass() == String.class
+                            || tempValor.getClass() == Boolean.class
+                            || tempValor.getClass() == Character.class) {
+                        return false;
+                    }
+                    if (evalFilter.getFiltro().getClass() == Integer.class) {
+                        return (int) tempValor < (int) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Double.class) {
+                        return (double) tempValor < (double) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Float.class) {
+                        return (float) tempValor < (float) evalFilter.getFiltro();
+                    }
+                    break;
+                case Filter.MAYOR_IGUAL:
+                    if (evalFilter.getFiltro().getClass() == String.class
+                            || tempValor.getClass() == Boolean.class
+                            || tempValor.getClass() == Character.class) {
+                        return false;
+                    }
+                    if (evalFilter.getFiltro().getClass() == Integer.class) {
+                        return (int) tempValor >= (int) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Double.class) {
+                        return (double) tempValor >= (double) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Float.class) {
+                        return (float) tempValor >= (float) evalFilter.getFiltro();
+                    }
+                    break;
+                case Filter.MENOR_IGUAL:
+                    if (evalFilter.getFiltro().getClass() == String.class
+                            || tempValor.getClass() == Boolean.class
+                            || tempValor.getClass() == Character.class) {
+                        return false;
+                    }
+                    if (evalFilter.getFiltro().getClass() == Integer.class) {
+                        return (int) tempValor <= (int) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Double.class) {
+                        return (double) tempValor <= (double) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Float.class) {
+                        return (float) tempValor <= (float) evalFilter.getFiltro();
+                    }
+                    break;
+                case Filter.IGUAL:
+                    if (evalFilter.getFiltro().getClass() == String.class){
+                        return ((String) tempValor).equals((String) evalFilter.getFiltro());
+                    }
+                    if (evalFilter.getFiltro().getClass() == Boolean.class){
+                        return (boolean) tempValor ^ (boolean) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Character.class){
+                        return (char) tempValor == (char) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Integer.class) {
+                        return (int) tempValor == (int) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Double.class) {
+                        return (double) tempValor == (double) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Float.class) {
+                        return (float) tempValor == (float) evalFilter.getFiltro();
+                    }
+                    break;
+                case Filter.DIFERENTE:
+                    if (evalFilter.getFiltro().getClass() == String.class){
+                        return !((String) tempValor).equals((String) evalFilter.getFiltro());
+                    }
+                    if (evalFilter.getFiltro().getClass() == Boolean.class){
+                        return !(boolean) tempValor ^ (boolean) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Character.class){
+                        return (char) tempValor != (char) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Integer.class) {
+                        return (int) tempValor != (int) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Double.class) {
+                        return (double) tempValor != (double) evalFilter.getFiltro();
+                    }
+                    if (evalFilter.getFiltro().getClass() == Float.class) {
+                        return (float) tempValor != (float) evalFilter.getFiltro();
+                    }
+                    break;
+            }
+        }
+        return true;
+    }
 }

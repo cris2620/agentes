@@ -108,7 +108,6 @@ public class Pruebas {
         Item[] seleccion = new Item[5];
         double[] pesos = new double[5];
         
-        
         seleccion = motor.getSimilarItems(eval, 5);
         System.out.println("Busqueda Item");
         for (Item item : seleccion) {
