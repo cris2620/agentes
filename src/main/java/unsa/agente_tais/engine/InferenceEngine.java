@@ -35,6 +35,4 @@ public interface InferenceEngine {
     public void removeFilter(Filter deleteFilter);
     
     public void clearFilters();
-    
-    public void useFilters();
 }

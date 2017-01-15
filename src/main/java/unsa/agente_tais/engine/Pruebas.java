@@ -93,8 +93,8 @@ public class Pruebas {
         baseConocimiento.addItem(t4);
         baseConocimiento.addItem(t5);
         
-        System.out.println("Base de Conocimiento");
-        System.out.println(baseConocimiento.toString());
+        //System.out.println("Base de Conocimiento");
+        //System.out.println(baseConocimiento.toString());
         
         Item eval = new Item();
         eval.addTrait(eval1);
@@ -105,6 +105,22 @@ public class Pruebas {
         eval.addTrait(eval6);
         
         InferenceEngine motor = new InferenceEngineKNN(baseConocimiento);
+        
+        //Filtros
+        Filter<Integer> f1 = new Filter<>("edad", 15, Filter.MAYOR);
+        Filter<Double> f2 = new Filter<>("talla_cm", 20.1, Filter.MENOR_IGUAL);
+        Filter<Float> f3 = new Filter<>("peso_kg", 100.5f, Filter.MAYOR);
+        Filter<String> f4 = new Filter<>("tipo_sangre", "O-", Filter.IGUAL);
+        Filter<Character> f5 = new Filter<>("sexo", 'M', Filter.DIFERENTE);
+        Filter<Boolean> f6 = new Filter<>("ambos_padres", false, Filter.RECHAZAR);
+        
+        motor.addFilter(f1);
+        motor.addFilter(f2);
+        motor.addFilter(f3);
+        motor.addFilter(f4);
+        motor.addFilter(f5);
+        motor.addFilter(f6);
+        
         Item[] seleccion = new Item[5];
         double[] pesos = new double[5];
         
@@ -120,8 +136,8 @@ public class Pruebas {
             System.out.println(peso);
         }
         
-        System.out.println("item mas cercado: " + motor.getSimilarItem(eval).toString());
-        System.out.println("peso mas cercano: " + motor.getDistItem(eval));
+        //System.out.println("item mas cercado: " + motor.getSimilarItem(eval).toString());
+        //System.out.println("peso mas cercano: " + motor.getDistItem(eval));
         
     }
 }

@@ -90,7 +90,8 @@ public class Trait<T> {
     public boolean testFilter(Filter evalFilter) {
         if (this.getValor().getClass() != evalFilter.getFiltro().getClass()
                 || !this.getDescripcion().equals(evalFilter.getDescripcion())) {
-            return false;
+            //si no es el Trait correspondiente lo ignora
+            return true;
         } else {
             Object tempValor = this.getValor();
             switch (evalFilter.getTipo()) {
@@ -100,7 +101,8 @@ public class Trait<T> {
                     if (evalFilter.getFiltro().getClass() == String.class
                             || tempValor.getClass() == Boolean.class
                             || tempValor.getClass() == Character.class) {
-                        return false;
+                        //la operacion no corresponde
+                        return true;
                     }
                     if (evalFilter.getFiltro().getClass() == Integer.class) {
                         return (int) tempValor > (int) evalFilter.getFiltro();
@@ -116,7 +118,8 @@ public class Trait<T> {
                     if (evalFilter.getFiltro().getClass() == String.class
                             || tempValor.getClass() == Boolean.class
                             || tempValor.getClass() == Character.class) {
-                        return false;
+                        //la operacion no corresponde
+                        return true;
                     }
                     if (evalFilter.getFiltro().getClass() == Integer.class) {
                         return (int) tempValor < (int) evalFilter.getFiltro();
@@ -132,7 +135,8 @@ public class Trait<T> {
                     if (evalFilter.getFiltro().getClass() == String.class
                             || tempValor.getClass() == Boolean.class
                             || tempValor.getClass() == Character.class) {
-                        return false;
+                        //la operacion no corresponde
+                        return true;
                     }
                     if (evalFilter.getFiltro().getClass() == Integer.class) {
                         return (int) tempValor >= (int) evalFilter.getFiltro();
@@ -148,7 +152,8 @@ public class Trait<T> {
                     if (evalFilter.getFiltro().getClass() == String.class
                             || tempValor.getClass() == Boolean.class
                             || tempValor.getClass() == Character.class) {
-                        return false;
+                        //la operacion no corresponde
+                        return true;
                     }
                     if (evalFilter.getFiltro().getClass() == Integer.class) {
                         return (int) tempValor <= (int) evalFilter.getFiltro();

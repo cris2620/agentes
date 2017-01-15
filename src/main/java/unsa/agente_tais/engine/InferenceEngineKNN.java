@@ -96,6 +96,9 @@ public class InferenceEngineKNN implements InferenceEngine {
             for (int j = 0; j < myItem.size(); j++) {
                 myTrait = myItem.getAtTrait(j);
                 tempTrait = evalItem.getAtTrait(j);
+                if(!evalFilters(myTrait)){
+                    continue;
+                }
                 if (myTrait.sameFormTrait(tempTrait)) {
                     if (myTrait.getValor().getClass() == String.class) {
                         if (!((String) myTrait.getValor()).equals((String) tempTrait.getValor())) {
@@ -178,6 +181,9 @@ public class InferenceEngineKNN implements InferenceEngine {
             for (int j = 0; j < myItem.size(); j++) {
                 myTrait = myItem.getAtTrait(j);
                 tempTrait = evalItem.getAtTrait(j);
+                if(!evalFilters(myTrait)){
+                    continue;
+                }
                 if (myTrait.sameFormTrait(tempTrait)) {
                     if (myTrait.getValor().getClass() == String.class) {
                         if (!((String) myTrait.getValor()).equals((String) tempTrait.getValor())) {
@@ -271,16 +277,13 @@ public class InferenceEngineKNN implements InferenceEngine {
         filtros.clear();
     }
     
-    @Override
-    public void useFilters(){
-        int count = 0;
-        ArrayList<Integer> indices = new ArrayList<>();
-        Filter tempFilter;
-        Item tempItem;
-        for (int i = 0; i < casesknn.size(); i++) {
-            tempItem = casesknn.getAtItem(i);
-            for (int j = 0; j < filtros.size(); j++) {
+    private boolean evalFilters(Trait evalTrait){
+        for (int i = 0; i < filtros.size(); i++) {
+            //si el filtro es negativo devuelve false
+            if(!evalTrait.testFilter(filtros.get(i))){
+                return false;
             }
         }
+        return true;
     }
 }
